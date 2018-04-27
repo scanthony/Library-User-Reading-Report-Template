@@ -1,0 +1,148 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <title>reveal.js</title>
+    <link rel="stylesheet" href="css/custom-gc.css"/>
+    <link rel="stylesheet" href="css/particles.js-style.css">
+    <link rel="stylesheet" href="css/reveal.css">
+    <link rel="stylesheet" href="css/theme/black_mod.css">
+
+    <!-- Theme used for syntax highlighting of code -->
+    <link rel="stylesheet" href="lib/css/zenburn.css">
+
+    <!-- Printing and PDF exports -->
+
+    <script>
+        var link = document.createElement('link');
+        link.rel = 'stylesheet';
+        link.type = 'text/css';
+        link.href = window.location.search.match(/print-pdf/gi) ? 'css/print/pdf.css' : 'css/print/paper.css';
+        document.getElementsByTagName('head')[0].appendChild(link);
+    </script>
+</head>
+<body>
+
+<div id="particles-js"></div>
+<div class="reveal" style="position:absolute;left:0;top:0;">
+    <div class="slides">
+        <section>
+            <img class="plain" src="img/hex-01.svg" height="25%" width="25%" alt="装饰图案">
+            <h1>某某某图书馆2017年阅读报告</h1>
+            <p>演示用，内容纯属虚构</p>
+            <img class="plain" src="img/hex-02.svg" height="25%" width="25%" alt="装饰图案">
+        </section>
+        <section>
+
+            <h2>前言</h2>
+            <br />
+            <p>某某某图书馆是一家虚构的图书馆，位于我国东部某某省。这份某某某图书馆的阅读报告内容纯属虚构，仅用于演示数据可视化效果。</p>
+            <br />
+            <p>本阅读报告采用reveal.js、d3等开源JavaScript技术构建，欢迎您在GitHub上查看本项目源代码，并应用到您所在机构的数据可视化展示项目中。</p>
+
+        </section>
+
+
+        <section data-background-color="rgba(255,255,255,0.6)" style="alignment: center">
+            <div style="background-image:url('/img/wave-pattern.svg');width: 640px; height: 480px; margin: auto; margin-top: 0">
+                <div style="alignment: center">
+                    <h1 style="font-size: 8em; color: rgba(128,128,128,0.75); font-family:'Source Sans Pro', Helvetica, sans-serif;">
+                        01</h1>
+                    <h3 style="position: relative; top: -1em; color: rgba(80,80,80,1)">阅读账单</h3>
+                </div>
+            </div>
+
+            <!---<p style="position: relative; top: 4em; color:rgb(220,220,220)">向<span style="color:white">下</span>滑动屏幕查看下一页</p>
+            <p style="position: relative; top: 4em; color:rgb(220,220,220)">向<span style="color:white">右</span>滑动屏幕跳到下一章节</p>--->
+        </section>
+        <section>
+            <h2 class="leftHeading" style="">馆藏数据</h2>
+
+            <div class="row" style="margin-top: 3em;">
+                <div class="col-60" style="margin-top: 5em;">
+                    <ul>
+                        <li style="margin-bottom: 2em;"><h3>2017年度，新增实体文献共计<span class="hlnumber">30000</span>册。</h3></li>
+                        <li style="margin-bottom: 2em;"><h3>排除特藏古籍，实体藏书共计<span class="hlnumber">180000</span>册。</h3></li>
+                        <li style="margin-bottom: 2em;"><h3>本年度新增文献占馆藏总量的<span class="hlnumber">16.67%</span>。</h3></li>
+                    </ul>
+                </div>
+                <div class="col-40" style="padding: 0;">
+                    <div
+                            class="fig-container"
+                            style="width:750px;height:750px;"
+                            data-file="d3-fig/pie.html">
+                            <!--data-file="d3-fig/new-collection-items.html">-->
+                    </div>
+                </div>
+            </div>
+
+        </section>
+
+        <section>
+            <h2 class="leftHeading" style="">到馆人数</h2>
+
+            <div style="margin-top: 5em; text-align: left">
+                <p style="margin-left: 6em">2017年，某某某图书馆共接待读者346100人次，日均948人次。<br />暑期和10月份是读者到馆高峰期。</p>
+
+                <div class="fig-container"
+                     style="width:1900px;height:700px;margin-left: 180px"
+                     data-file="d3-fig/visits-per-month.html">
+                </div>
+            </div>
+
+        </section>
+
+        <section>
+            <h2 class="leftHeading" style="">谢谢观看！</h2>
+
+            <div style="margin-top: 5em; text-align: left">
+                <p><br /></p>
+                <p style="margin-left: 6em">偷懒了，暂时只有这么多，更多内容待添加！</p>
+                <p><br /></p>
+                <p><br /></p>
+                <p><br /></p>
+                <p><br /></p>
+                <p><br /></p>
+            </div>
+
+        </section>
+
+    </div>
+</div>
+
+
+<script src="lib/js/head.min.js"></script>
+<script src="js/reveal.js"></script>
+
+<script>
+    // More info about config & dependencies:
+    // - https://github.com/hakimel/reveal.js#configuration
+    // - https://github.com/hakimel/reveal.js#dependencies
+    Reveal.initialize({
+        controls: false,
+        progress: true,
+        history: true,
+        center: true,
+        width: 1920,
+        height: 1080,
+        dependencies: [
+            {src: 'js/reveald3.js'},
+            {src: 'plugin/markdown/marked.js'},
+            {src: 'plugin/markdown/markdown.js'},
+            {src: 'plugin/notes/notes.js', async: true},
+            {
+                src: 'plugin/highlight/highlight.js', async: true, callback: function () {
+                hljs.initHighlightingOnLoad();
+            }
+            }
+        ]
+    });
+
+</script>
+<script src="js/particles.min.js"></script>
+<script src="js/app.js"></script>
+
+</body>
+</html>

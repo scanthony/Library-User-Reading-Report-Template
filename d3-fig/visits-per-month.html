@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<style>
+    .axis text {
+        fill: white;
+        font: 2.5em 黑体;
+    }
+
+    .label text {
+        font: 2em 黑体;
+    }
+
+    .axis path,
+    .axis line {
+        fill: none;
+        stroke: white;
+        shape-rendering: crispEdges;
+    }
+
+    .line {
+        fill: none;
+        stroke-width: 10px;
+        stroke: #2d79d7;
+    }
+
+    .label {
+        text-anchor: middle;
+    }
+
+    /*.label rect {*/
+    /*fill: white;*/
+    /*}*/
+
+    .label-key {
+        font-weight: bold;
+    }
+
+
+</style>
+<svg></svg>
+<script src="js/d3.v4.js"></script>
+<script>
+
+    var svg = d3.select("svg");
+
+    svg.attr("width", window.innerWidth * 0.9)
+        .attr("height", window.innerHeight * 0.9)
+
+    var margin = {top: 40, right: 40, bottom: 40, left: 40},
+        width = +svg.attr("width") - margin.left - margin.right,
+        height = +svg.attr("height") - margin.top - margin.bottom
+
+    var g = svg.append("g")
+        .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+    d3.csv("visits-per-month.csv", function (d) {
+        for (var k in d) if (k !== "date") d[k] = +d[k];
+        return d;
+    }, function (error, data) {
+        if (error) throw error;
+
+        var series = data.columns.slice(1).map(function (key) {
+            return data.map(function (d) {
+                return {
+                    key: key,
+                    date: d.date,
+                    value: d[key]
+                };
+            });
+        });
+
+        var xScaleNum = series[0].length
+
+        var xScaleRange = []
+
+        var xScaleDomain = []
+
+        for (var i = 0; i < xScaleNum; i++) {
+            xScaleRange.push(i * width / xScaleNum)
+            xScaleDomain.push(series[0][i].date)
+        }
+
+        var x = d3.scaleOrdinal()
+            .domain(xScaleDomain)
+            .range(xScaleRange);
+
+        var y = d3.scaleLinear()
+            .domain([0, d3.max(series, function (s) {
+                return d3.max(s, function (d) {
+                    return d.value;
+                });
+            })])
+            .range([height, 0]);
+
+        g.append("g")
+            .attr("class", "axis axis--x")
+            .attr("transform", "translate(0," + height + ")")
+            .call(d3.axisBottom(x).tickSize(0).tickPadding(12));
+
+        var serie = g.selectAll(".serie")
+            .data(series)
+            .enter().append("g")
+            .attr("class", "serie");
+
+        var seriePath = serie.append("path")
+            .attr("class", "line")
+            //            .style("stroke", function (d) {
+            //                return z(d[0].key);
+            //            })
+            .attr("d", d3.line()
+                .x(function (d) {
+                    return x(d.date);
+                })
+                .y(function (d) {
+                    return y(height)
+                }))
+            .transition()
+            .duration(1700)
+            .attr("d", d3.line()
+                .x(function (d) {
+                    return x(d.date);
+                })
+                .y(function (d) {
+                    return y(d.value)
+                }))
+
+        var label = serie.selectAll(".label")
+            .data(function (d) {
+                return d;
+            })
+            .enter().append("g")
+            .attr("class", "label")
+            .attr("transform", function (d, i) {
+                return "translate(" + x(d.date) + "," + y(d.value) + ")";
+            });
+
+//        d3.selectAll(".axis--x .tick line").attr("y2", "0")
+
+        label.append("text")
+            .attr("dy", "-0.35em")
+            .text(function (d) {
+                return d.value;
+            }).attr("fill", "rgba(255,255,255,0)")
+            .transition()
+            .duration(5000)
+            .attr("fill", "rgba(255,255,255,1)")
+    });
+</script>

@@ -1,0 +1,112 @@
+<!doctype html>
+<html>
+
+<head>
+    <title>Pie Chart</title>
+    <script src="js/Chart.bundle.min.js"></script>
+    <!--<script src="js/utils.js"></script>-->
+    <script src="js/chartjs-plugin-datalabels.min.js"></script>
+</head>
+
+<body style="padding: 0;">
+
+<canvas id="chart-area" style="width:90vw;height:90vh;"></canvas>
+
+
+<script>
+    var config = {
+        type: 'pie',
+        data: {
+            datasets: [{
+                data: [
+                    30000,
+                    150000
+                ],
+                backgroundColor: [
+                    'rgb(64,256,200)',
+                    'rgb(64,200,256)'
+
+                ],
+                borderWidth: [9, 9],
+                borderColor: ["rgba(82,82,99,1)", "rgba(82,82,99,1)"],
+                label: '新增馆藏'
+            }],
+//            labels: [],
+        },
+        options: {
+            responsive: false,
+            plugins: {
+                datalabels: {
+                    backgroundColor: function (context) {
+//                        return context.dataset.backgroundColor;
+                        return "rgba(82,82,99,0)"
+                    },
+                    anchor: "center",
+                    align: "end",
+                    borderRadius: 4,
+                    color: "white",
+                    font: {
+                        weight: 'bold',
+                        family: '黑体',
+                        size: 25
+                    },
+                    formatter: function (d) {
+                        return d < 40000 ? "新增馆藏" : (d > 150000 ? "额外的动画演示" : "")
+                    }
+                }
+            }
+        }
+    };
+    window.onload = function () {
+        var ctx = document.getElementById('chart-area').getContext('2d');
+        window.myPie = new Chart(ctx, config);
+    };
+
+    var _transitions = [
+        {
+            transitionForward: function () {
+                config.data.datasets.forEach(function (dataset) {
+                    dataset.data = dataset.data.map(function (d, i) {
+                        return [300000, 160000][i]
+                    });
+                });
+                window.myPie.update();
+            },
+            transitionBackward: function () {
+                config.data.datasets.forEach(function (dataset) {
+                    dataset.data = dataset.data.map(function (d, i) {
+                        return [30000, 150000][i];
+                    });
+                    console.log(dataset.data);
+                });
+                window.myPie.update();
+            },
+            index: 0
+        },
+        {
+            transitionForward: function () {
+                config.data.datasets.forEach(function (dataset) {
+                    dataset.data = dataset.data.map(function (d, i) {
+                        return [300000, 550000][i];
+                    });
+                });
+                window.myPie.update();
+            },
+            index: 1
+        },
+        {
+            transitionBackward: function () {
+                config.data.datasets.forEach(function (dataset) {
+                    dataset.data = dataset.data.map(function (d, i) {
+                        return [300000, 550000][i];
+                    });
+                });
+                window.myPie.update();
+            },
+            index: 2
+        }
+    ]
+</script>
+</body>
+
+</html>
