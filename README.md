@@ -4,6 +4,8 @@
 
 需要浏览器支持SVG和Canvas，不适用于版本过于老旧的浏览器。
 
+[点击此处，查看实时展示。](https://scanthony.github.io/Library-User-Reading-Report-Template)
+
 ## TODOs
 
 * 演示页面数量有限，待完善
@@ -17,11 +19,11 @@
 * [Particles.js](https://vincentgarreau.com/particles.js/)
 
 
-制作过程中还参考了[bl.ock.org](https://bl.ocks.org)上面的部分d3y演示代码。
+制作过程中还参考了[bl.ock.org](https://bl.ocks.org)上面的部分d3演示代码。
 
 
 ## 版权信息
 
-引用的各个库的版权信息详见它们各自的页面。
+引用的各个库和代码的版权信息详见它们各自的页面。
 
-其余代码的版权遵循MIT协议。
+由本人贡献的代码版权遵循MIT协议。

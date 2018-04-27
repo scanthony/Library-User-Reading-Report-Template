@@ -1,5 +1,7 @@
 <!DOCTYPE html>
+<head>
 <meta charset="utf-8">
+<title>新增馆藏 - 饼图</title>
 <style>
     .axis text {
         fill: white;
@@ -37,6 +39,8 @@
 
 
 </style>
+</head>
+<body>
 <svg></svg>
 <script src="js/d3.v4.js"></script>
 <script>
@@ -134,8 +138,6 @@
                 return "translate(" + x(d.date) + "," + y(d.value) + ")";
             });
 
-//        d3.selectAll(".axis--x .tick line").attr("y2", "0")
-
         label.append("text")
             .attr("dy", "-0.35em")
             .text(function (d) {
@@ -146,3 +148,4 @@
             .attr("fill", "rgba(255,255,255,1)")
     });
 </script>
+</body>
